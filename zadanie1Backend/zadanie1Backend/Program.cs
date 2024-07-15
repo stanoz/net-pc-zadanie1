@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using zadanie1Backend.Data;
+using zadanie1Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(options =>
@@ -7,6 +8,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
