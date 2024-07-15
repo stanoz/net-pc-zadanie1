@@ -40,9 +40,24 @@ public class ContactService : IContactService
         return serviceResponse;
     }
 
-    public Task<ServiceResponse<GetContactDto>> GetContactById(int id)
+    public async Task<ServiceResponse<GetContactDto>> GetContactById(int id)
     {
-        throw new NotImplementedException();
+        var serviceResponse = new ServiceResponse<GetContactDto>();
+        try
+        {
+            var dbContact = await _dataContext.Contacts
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            serviceResponse.Data = _mapper.Map<GetContactDto>(dbContact);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+
+        return serviceResponse;
     }
 
     public Task<ServiceResponse<GetContactDto>> EditContact(int id, PutContactDto putContactDto)
