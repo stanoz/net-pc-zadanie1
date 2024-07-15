@@ -70,8 +70,30 @@ public class ContactService : IContactService
         throw new NotImplementedException();
     }
 
-    public Task<ServiceResponse<int>> DeleteContactById(int id)
+    public async Task<ServiceResponse<int>> DeleteContactById(int id)
     {
-        throw new NotImplementedException();
+        var serviceResponse = new ServiceResponse<int>();
+        try
+        {
+            var dbContact = await _dataContext.Contacts
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(c => c.Id == id);
+            if (dbContact is null)
+            {
+                throw new ArgumentException("Contact not found.");
+            }
+
+            _dataContext.Contacts.Remove(dbContact);
+            await _dataContext.SaveChangesAsync();
+
+            serviceResponse.Data = id;
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+
+        return serviceResponse;
     }
 }
