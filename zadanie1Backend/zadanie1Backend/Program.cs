@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using zadanie1Backend.Data;
 using zadanie1Backend.Services;
+using zadanie1Backend.Validator;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(options =>
@@ -10,6 +11,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IValidate, Validator>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
