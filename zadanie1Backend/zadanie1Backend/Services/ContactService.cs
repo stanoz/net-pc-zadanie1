@@ -1,13 +1,43 @@
-﻿using zadanie1Backend.Dtos;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using zadanie1Backend.Data;
+using zadanie1Backend.Dtos;
 using zadanie1Backend.Models;
 
 namespace zadanie1Backend.Services;
 
 public class ContactService : IContactService
 {
-    public Task<ServiceResponse<List<GetContactDto>>> GetAllContacts()
+    private readonly DataContext _dataContext;
+    private readonly IMapper _mapper;
+
+    public ContactService(DataContext dataContext, IMapper mapper)
     {
-        throw new NotImplementedException();
+        _dataContext = dataContext;
+        _mapper = mapper;
+    }
+
+    public async Task<ServiceResponse<List<GetContactDto>>> GetAllContacts()
+    {
+        var serviceResponse = new ServiceResponse<List<GetContactDto>>();
+        try
+        {
+            var dbContacts = await _dataContext.Contacts
+                .Include(c => c.Category)
+                .ToListAsync();
+
+            serviceResponse.Data = dbContacts
+                .Select(contact => _mapper.Map<GetContactDto>(contact))
+                .ToList();
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+
+        return serviceResponse;
     }
 
     public Task<ServiceResponse<GetContactDto>> GetContactById(int id)
