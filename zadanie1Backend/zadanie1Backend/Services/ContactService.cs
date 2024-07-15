@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using zadanie1Backend.Data;
 using zadanie1Backend.Dtos;
 using zadanie1Backend.Models;
+using zadanie1Backend.Validator;
 
 namespace zadanie1Backend.Services;
 
@@ -11,11 +12,13 @@ public class ContactService : IContactService
 {
     private readonly DataContext _dataContext;
     private readonly IMapper _mapper;
+    private readonly IValidate _validator;
 
-    public ContactService(DataContext dataContext, IMapper mapper)
+    public ContactService(DataContext dataContext, IMapper mapper, IValidate validator)
     {
         _dataContext = dataContext;
         _mapper = mapper;
+        _validator = validator;
     }
 
     public async Task<ServiceResponse<List<GetContactDto>>> GetAllContacts()
@@ -65,9 +68,48 @@ public class ContactService : IContactService
         throw new NotImplementedException();
     }
 
-    public Task<ServiceResponse<GetContactDto>> AddContact(PostAndPutContactDto postContactDto)
+    public async Task<ServiceResponse<GetContactDto>> AddContact(PostAndPutContactDto postContactDto)
     {
-        throw new NotImplementedException();
+        var serviceResponse = new ServiceResponse<GetContactDto>();
+        try
+        {
+            var dbContact = await _dataContext.Contacts
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(c => c.Email == postContactDto.Email);
+            if (dbContact is not null)
+            {
+                throw new ArgumentException("Contact with given email address already exists!");
+            }
+
+            if (!_validator.ValidateContact(postContactDto))
+            {
+                throw new ArgumentException("Contact is not valid!");
+            }
+
+            var category = await _dataContext.Categories
+                .FirstOrDefaultAsync(c => c.Name == postContactDto.Category.Name);
+
+            if (category == null)
+            {
+                category = _mapper.Map<Category>(postContactDto.Category);
+                _dataContext.Categories.Add(category);
+            }
+
+            var contact = _mapper.Map<Contact>(postContactDto);
+            contact.Category = category;
+
+            _dataContext.Contacts.Add(contact);
+            await _dataContext.SaveChangesAsync();
+
+            serviceResponse.Data = _mapper.Map<GetContactDto>(contact);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+
+        return serviceResponse;
     }
 
     public async Task<ServiceResponse<int>> DeleteContactById(int id)
