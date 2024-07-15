@@ -63,9 +63,50 @@ public class ContactService : IContactService
         return serviceResponse;
     }
 
-    public Task<ServiceResponse<GetContactDto>> EditContact(int id, PostAndPutCategoryDto putContactDto)
+    public async Task<ServiceResponse<GetContactDto>> EditContact(int id, PostAndPutContactDto putContactDto)
     {
-        throw new NotImplementedException();
+        var serviceResponse = new ServiceResponse<GetContactDto>();
+        try
+        {
+            var dbContact = await _dataContext.Contacts
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(c => c.Id == id);
+            if (dbContact is null)
+            {
+                throw new ArgumentException("Contact not found.");
+            }
+
+            if (!_validator.ValidateContact(putContactDto))
+            {
+                throw new ArgumentException("Contact data is not valid.");
+            }
+
+            dbContact.Name = putContactDto.Name;
+            dbContact.Surname = putContactDto.Surname;
+            dbContact.Email = putContactDto.Email;
+            dbContact.PhoneNumber = putContactDto.PhoneNumber;
+            dbContact.Birthday = putContactDto.Birthday;
+
+            var category = await _dataContext.Categories
+                .FirstOrDefaultAsync(c => c.Name == putContactDto.Category.Name);
+            if (category == null)
+            {
+                category = _mapper.Map<Category>(putContactDto.Category);
+                _dataContext.Categories.Add(category);
+            }
+            dbContact.Category = category;
+
+            await _dataContext.SaveChangesAsync();
+
+            serviceResponse.Data = _mapper.Map<GetContactDto>(dbContact);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+
+        return serviceResponse;
     }
 
     public async Task<ServiceResponse<GetContactDto>> AddContact(PostAndPutContactDto postContactDto)
@@ -83,7 +124,7 @@ public class ContactService : IContactService
 
             if (!_validator.ValidateContact(postContactDto))
             {
-                throw new ArgumentException("Contact is not valid!");
+                throw new ArgumentException("Contact data is not valid!");
             }
 
             var category = await _dataContext.Categories
