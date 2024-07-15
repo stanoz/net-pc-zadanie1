@@ -60,12 +60,12 @@ public class ContactService : IContactService
         return serviceResponse;
     }
 
-    public Task<ServiceResponse<GetContactDto>> EditContact(int id, PutContactDto putContactDto)
+    public Task<ServiceResponse<GetContactDto>> EditContact(int id, PostAndPutCategoryDto putContactDto)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ServiceResponse<GetContactDto>> AddContact(PostContactDto postContactDto)
+    public Task<ServiceResponse<GetContactDto>> AddContact(PostAndPutContactDto postContactDto)
     {
         throw new NotImplementedException();
     }
