@@ -1,4 +1,6 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using zadanie1Backend;
 using zadanie1Backend.Data;
 using zadanie1Backend.Services;
 using zadanie1Backend.Validator;
@@ -10,6 +12,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddScoped<Profile, AutoMapperProfile>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IValidate, Validator>();
 builder.Services.AddControllersWithViews();
