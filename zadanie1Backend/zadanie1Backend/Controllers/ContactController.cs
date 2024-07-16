@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using zadanie1Backend.Dtos;
 using zadanie1Backend.Models;
 using zadanie1Backend.Services;
@@ -16,6 +17,7 @@ public class ContactController : ControllerBase
         _contactService = contactService;
     }
 
+    [EnableCors("MyAllowSpecificOrigins")]
     [HttpGet("get-all")]
     public async Task<ActionResult<ServiceResponse<List<GetContactDto>>>> GetAll()
     {
