@@ -17,7 +17,6 @@ public class ContactController : ControllerBase
         _contactService = contactService;
     }
 
-    [EnableCors("MyAllowSpecificOrigins")]
     [HttpGet("get-all")]
     public async Task<ActionResult<ServiceResponse<List<GetContactDto>>>> GetAll()
     {
