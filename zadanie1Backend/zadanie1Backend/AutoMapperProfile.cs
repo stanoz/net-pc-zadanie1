@@ -10,6 +10,7 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<Contact, GetContactDto>();
         CreateMap<Category, GetCategoryDto>();
+        CreateMap<Contact, GetGeneralContactDto>();
         CreateMap<PostAndPutCategoryDto, Category>()
             .ForMember(dest => dest.Id, opt => opt.Ignore());
         CreateMap<PostAndPutContactDto, Contact>()

@@ -21,17 +21,17 @@ public class ContactService : IContactService
         _validator = validator;
     }
 
-    public async Task<ServiceResponse<List<GetContactDto>>> GetAllContacts()
+    public async Task<ServiceResponse<List<GetGeneralContactDto>>> GetAllContacts()
     {
-        var serviceResponse = new ServiceResponse<List<GetContactDto>>();
+        var serviceResponse = new ServiceResponse<List<GetGeneralContactDto>>();
         try
         {
             var dbContacts = await _dataContext.Contacts
-                .Include(c => c.Category)
+                // .Include(c => c.Category)
                 .ToListAsync();
 
             serviceResponse.Data = dbContacts
-                .Select(contact => _mapper.Map<GetContactDto>(contact))
+                .Select(contact => _mapper.Map<GetGeneralContactDto>(contact))
                 .ToList();
         }
         catch (Exception ex)
