@@ -1,12 +1,17 @@
 import PropTypes from "prop-types";
+import ButtonComponent from "./ButtonComponent.jsx";
+import {Link} from "react-router-dom"
 
 export default function ContactComponent({name, surname, email, phoneNumber}){
     return (
         <li>
-            <h3>{name}</h3>
-            <h3>{surname}</h3>
+            <p>{name}</p>
+            <p>{surname}</p>
             <p>{email}</p>
             <p>{phoneNumber}</p>
+            {/*<Link to='/details'>Show details</Link>*/}
+            {/*<Link to='/edit'>Edit</Link>*/}
+            <ButtonComponent>Delete</ButtonComponent>
         </li>
     );
 }
