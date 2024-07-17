@@ -27,7 +27,6 @@ public class ContactService : IContactService
         try
         {
             var dbContacts = await _dataContext.Contacts
-                // .Include(c => c.Category)
                 .ToListAsync();
 
             serviceResponse.Data = dbContacts

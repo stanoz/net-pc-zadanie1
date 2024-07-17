@@ -41,7 +41,7 @@ public class Validator : IValidate
             return false;
         }
 
-        if (contact.Birthday > DateTime.Now)
+        if (contact.Birthday > DateOnly.FromDateTime(DateTime.Now))
         {
             return false;
         }

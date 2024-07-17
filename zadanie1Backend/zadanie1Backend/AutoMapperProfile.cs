@@ -8,6 +8,7 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
+
         CreateMap<Contact, GetContactDto>();
         CreateMap<Category, GetCategoryDto>();
         CreateMap<Contact, GetGeneralContactDto>();

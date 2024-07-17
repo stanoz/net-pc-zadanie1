@@ -9,5 +9,5 @@ public class Contact
     public string Password { get; set; }
     public Category Category { get; set; }
     public string PhoneNumber { get; set; }
-    public DateTime Birthday { get; set; }
+    public DateOnly Birthday { get; set; }
 }
