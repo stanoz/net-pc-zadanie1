@@ -9,7 +9,7 @@ export default function ContactComponent({name, surname, email, phoneNumber}){
             <p>{surname}</p>
             <p>{email}</p>
             <p>{phoneNumber}</p>
-            {/*<Link to='/details'>Show details</Link>*/}
+            <Link to={`/details/${email}`}>Show details</Link>
             {/*<Link to='/edit'>Edit</Link>*/}
             <ButtonComponent>Delete</ButtonComponent>
         </li>
