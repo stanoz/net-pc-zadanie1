@@ -5,8 +5,8 @@ export default function AddContactComponent(){
     return (
         <>
             <p>Add New Contact</p>
-            <Link to='/home'>Home</Link>
             <FormComponent/>
+            <Link to='/home'>Home</Link>
         </>
     );
 }
