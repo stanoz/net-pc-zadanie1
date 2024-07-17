@@ -1,8 +1,15 @@
 import PropTypes from "prop-types";
 import ButtonComponent from "./ButtonComponent.jsx";
 import {Link} from "react-router-dom"
+import {deleteContactByEmail} from "../data/DeleteContact.js";
 
-export default function ContactComponent({name, surname, email, phoneNumber}){
+export default function ContactComponent({name, surname, email, phoneNumber, onDelete}){
+    const handleDelete = () => {
+        deleteContactByEmail(email).then(() => {
+            onDelete();
+        });
+    }
+
     return (
         <li>
             <p>{name}</p>
@@ -11,7 +18,7 @@ export default function ContactComponent({name, surname, email, phoneNumber}){
             <p>{phoneNumber}</p>
             <Link to={`/details/${email}`}>Show details</Link>
             {/*<Link to='/edit'>Edit</Link>*/}
-            <ButtonComponent>Delete</ButtonComponent>
+            <ButtonComponent onClick={handleDelete}>Delete</ButtonComponent>
         </li>
     );
 }
@@ -21,4 +28,5 @@ ContactComponent.propTypes = {
     surname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     phoneNumber: PropTypes.string.isRequired,
+    onDelete: PropTypes.func,
 };

@@ -6,6 +6,16 @@ export default function ContactsListComponent() {
     const [contacts, setContacts] = useState([]);
 
     useEffect(() => {
+        refreshContacts();
+    }, []);
+
+    const refreshContacts = () => {
+        getAllContacts().then(data => {
+            setContacts(data);
+        });
+    };
+
+    useEffect(() => {
         getAllContacts().then(data => {
             setContacts(data);
         });
@@ -13,9 +23,13 @@ export default function ContactsListComponent() {
 
     return (
         <>
-            <ul>
-                {contacts.map((contact) => <ContactComponent key={contact.email} {...contact} />)}
-            </ul>
+            {contacts ? (
+                <ul>
+                    {contacts.map((contact) => <ContactComponent key={contact.email} {...contact} onDelete={refreshContacts} />)}
+                </ul>
+            ) : (
+                <p>No contacts found!</p>
+            )}
         </>
     );
 }
