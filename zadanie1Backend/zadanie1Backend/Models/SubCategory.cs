@@ -3,6 +3,6 @@
 public class SubCategory
 {
     public int Id { get; set; }
-    public string CategoryName { get; set; } = string.Empty;
+    public string CategoryName { get; set; }
     public string Name { get; set; }
 }

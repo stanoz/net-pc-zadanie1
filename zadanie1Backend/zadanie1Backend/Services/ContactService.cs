@@ -153,12 +153,12 @@ public class ContactService : IContactService
                 _dataContext.Categories.Add(category);
             }
 
-            SubCategory subCategory;
+            SubCategory subCategory = null;
             if (postContactDto.SubCategory != null && !string.IsNullOrWhiteSpace(postContactDto.SubCategory.Name))
             {
                 subCategory = await _dataContext.SubCategories
                     .FirstOrDefaultAsync(sc => sc.Name == postContactDto.SubCategory.Name);
-                if (subCategory == null)
+                if (subCategory is null)
                 {
                     subCategory = _mapper.Map<SubCategory>(postContactDto.SubCategory);
                     _dataContext.SubCategories.Add(subCategory);
@@ -167,6 +167,7 @@ public class ContactService : IContactService
 
             var contact = _mapper.Map<Contact>(postContactDto);
             contact.Category = category;
+            contact.SubCategory = subCategory;
 
             _dataContext.Contacts.Add(contact);
             await _dataContext.SaveChangesAsync();

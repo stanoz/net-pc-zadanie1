@@ -27,6 +27,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<Profile, AutoMapperProfile>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<IValidate, Validator>();
 builder.Services.AddControllersWithViews();
 
