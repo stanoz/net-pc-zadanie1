@@ -152,14 +152,14 @@ public class ContactService : IContactService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<int>> DeleteContactById(int id)
+    public async Task<ServiceResponse<string>> DeleteContactByEmail(string email)
     {
-        var serviceResponse = new ServiceResponse<int>();
+        var serviceResponse = new ServiceResponse<string>();
         try
         {
             var dbContact = await _dataContext.Contacts
                 .Include(c => c.Category)
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Email == email);
             if (dbContact is null)
             {
                 throw new ArgumentException("Contact not found.");
@@ -168,7 +168,7 @@ public class ContactService : IContactService
             _dataContext.Contacts.Remove(dbContact);
             await _dataContext.SaveChangesAsync();
 
-            serviceResponse.Data = id;
+            serviceResponse.Data = email;
         }
         catch (Exception ex)
         {

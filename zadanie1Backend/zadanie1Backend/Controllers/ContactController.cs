@@ -42,9 +42,9 @@ public class ContactController : ControllerBase
         return Ok(await _contactService.EditContact(id, putContactDto));
     }
 
-    [HttpDelete("delete-contact-{id:int}")]
-    public async Task<ActionResult<ServiceResponse<int>>> DeleteContact(int id)
+    [HttpDelete("delete-contact-{email}")]
+    public async Task<ActionResult<ServiceResponse<string>>> DeleteContact(string email)
     {
-        return Ok(await _contactService.DeleteContactById(id));
+        return Ok(await _contactService.DeleteContactByEmail(email));
     }
 }

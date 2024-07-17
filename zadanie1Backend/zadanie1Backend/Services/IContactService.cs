@@ -9,5 +9,5 @@ public interface IContactService
     public Task<ServiceResponse<GetContactDto>> GetContactByEmail(string email);
     public Task<ServiceResponse<GetContactDto>> EditContact(int id, PostAndPutContactDto putContactDto);
     public Task<ServiceResponse<GetContactDto>> AddContact(PostAndPutContactDto postContactDto);
-    public Task<ServiceResponse<int>> DeleteContactById(int id);
+    public Task<ServiceResponse<string>> DeleteContactByEmail(string email);
 }
