@@ -10,7 +10,7 @@ export default function ShowContactDetailsComponent({name, surname, email, categ
             <p>{password}</p>
             <p>{phoneNumber}</p>
             <p>{birthday}</p>
-            <p>{subCategory.name}</p>
+            <p>{subCategory ? subCategory.name : 'No Subcategory'}</p>
         </>
     );
 }
@@ -26,6 +26,6 @@ ShowContactDetailsComponent.propTypes = {
     phoneNumber: PropTypes.string.isRequired,
     birthday: PropTypes.string.isRequired,
     subCategory: PropTypes.shape({
-        name: PropTypes.string.isRequired
-    }).isRequired,
+        name: PropTypes.string
+    }),
 };
