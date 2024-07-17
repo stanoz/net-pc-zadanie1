@@ -3,6 +3,7 @@ import Header from "./components/Header.jsx";
 import ContactsListComponent from "./components/ContactsListComponent.jsx";
 import {Routes, Route, Navigate} from 'react-router-dom'
 import ContactDetailsComponent from "./components/ContactDetailsComponent.jsx";
+import AddContactComponent from "./components/AddContactComponent.jsx";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Route path="/home" element={<ContactsListComponent/>}/>
             <Route path="/" element={<Navigate replace to="/home" />} />
         <Route path='/details/:email' element={<ContactDetailsComponent/>}/>
+        <Route path='/add' element={<AddContactComponent/>}/>
         </Routes>
     </>
   )

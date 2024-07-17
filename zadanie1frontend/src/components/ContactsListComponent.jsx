@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import ContactComponent from "./ContactComponent.jsx";
 import {getAllContacts} from "../data/GetAllData.js";
+import {Link} from "react-router-dom";
 
 export default function ContactsListComponent() {
     const [contacts, setContacts] = useState([]);
@@ -24,11 +25,18 @@ export default function ContactsListComponent() {
     return (
         <>
             {contacts ? (
-                <ul>
-                    {contacts.map((contact) => <ContactComponent key={contact.email} {...contact} onDelete={refreshContacts} />)}
-                </ul>
+                <>
+                    <ul>
+                        {contacts.map((contact) => <ContactComponent key={contact.email} {...contact}
+                                                                     onDelete={refreshContacts}/>)}
+                    </ul>
+                    <Link to='/add'>Add new contact</Link>
+                </>
             ) : (
-                <p>No contacts found!</p>
+                <>
+                    <p>No contacts found!</p>
+                    <Link to='/add'>Add new contact</Link>
+                </>
             )}
         </>
     );

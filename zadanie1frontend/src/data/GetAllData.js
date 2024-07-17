@@ -4,11 +4,12 @@ const getAllContacts = () => {
     const baseUrl = 'https://localhost:44373/api/Contact/get-all';
     return $.get(baseUrl).then(response => {
         if (response.success && Array.isArray(response.data)) {
-            return response.data.map(({ name, surname, email, phoneNumber }) => ({
+            return response.data.map(({ name, surname, email, phoneNumber, category }) => ({
                 name,
                 surname,
                 email,
-                phoneNumber
+                phoneNumber,
+                category : category.name
             }));
         } else {
             return [];

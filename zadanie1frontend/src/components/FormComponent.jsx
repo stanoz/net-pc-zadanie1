@@ -1,4 +1,4 @@
-export default function FromComponent(){
+export default function FormComponent(){
     return (
         <>
         <p>form</p>

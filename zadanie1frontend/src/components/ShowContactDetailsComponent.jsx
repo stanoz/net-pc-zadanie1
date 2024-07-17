@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export default function ShowContactDetailsComponent({name, surname, email, category, password, phoneNumber, birthday}){
+export default function ShowContactDetailsComponent({name, surname, email, category, password, phoneNumber, birthday, subCategory}){
     return (
         <>
             <p>{name}</p>
@@ -10,6 +10,7 @@ export default function ShowContactDetailsComponent({name, surname, email, categ
             <p>{password}</p>
             <p>{phoneNumber}</p>
             <p>{birthday}</p>
+            <p>{subCategory.name}</p>
         </>
     );
 }
@@ -24,4 +25,7 @@ ShowContactDetailsComponent.propTypes = {
     password: PropTypes.string.isRequired,
     phoneNumber: PropTypes.string.isRequired,
     birthday: PropTypes.string.isRequired,
+    subCategory: PropTypes.shape({
+        name: PropTypes.string.isRequired
+    }).isRequired,
 };
