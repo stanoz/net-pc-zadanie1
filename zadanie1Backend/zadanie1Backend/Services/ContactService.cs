@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using zadanie1Backend.Data;
 using zadanie1Backend.Dtos;
 using zadanie1Backend.Models;
@@ -27,6 +26,7 @@ public class ContactService : IContactService
         try
         {
             var dbContacts = await _dataContext.Contacts
+                .Include(c => c.Category)
                 .ToListAsync();
 
             serviceResponse.Data = dbContacts
@@ -49,6 +49,7 @@ public class ContactService : IContactService
         {
             var dbContact = await _dataContext.Contacts
                 .Include(c => c.Category)
+                .Include(c => c.SubCategory)
                 .FirstOrDefaultAsync(c => c.Email == email);
 
             serviceResponse.Data = _mapper.Map<GetContactDto>(dbContact);
@@ -62,14 +63,15 @@ public class ContactService : IContactService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<GetContactDto>> EditContact(int id, PostAndPutContactDto putContactDto)
+    public async Task<ServiceResponse<GetContactDto>> EditContact(string email, PostAndPutContactDto putContactDto)
     {
         var serviceResponse = new ServiceResponse<GetContactDto>();
         try
         {
             var dbContact = await _dataContext.Contacts
                 .Include(c => c.Category)
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .Include(c => c.SubCategory)
+                .FirstOrDefaultAsync(c => c.Email == email);
             if (dbContact is null)
             {
                 throw new ArgumentException("Contact not found.");
@@ -94,6 +96,22 @@ public class ContactService : IContactService
                 _dataContext.Categories.Add(category);
             }
             dbContact.Category = category;
+
+            if (putContactDto.SubCategory != null && !string.IsNullOrWhiteSpace(putContactDto.SubCategory.Name))
+            {
+                var subCategory = await _dataContext.SubCategories
+                    .FirstOrDefaultAsync(sc => sc.Name == putContactDto.SubCategory.Name);
+                if (subCategory == null)
+                {
+                    subCategory = _mapper.Map<SubCategory>(putContactDto.SubCategory);
+                    _dataContext.SubCategories.Add(subCategory);
+                }
+                dbContact.SubCategory = subCategory;
+            }
+            else
+            {
+                dbContact.SubCategory = null;
+            }
 
             await _dataContext.SaveChangesAsync();
 
@@ -135,6 +153,18 @@ public class ContactService : IContactService
                 _dataContext.Categories.Add(category);
             }
 
+            SubCategory subCategory;
+            if (postContactDto.SubCategory != null && !string.IsNullOrWhiteSpace(postContactDto.SubCategory.Name))
+            {
+                subCategory = await _dataContext.SubCategories
+                    .FirstOrDefaultAsync(sc => sc.Name == postContactDto.SubCategory.Name);
+                if (subCategory == null)
+                {
+                    subCategory = _mapper.Map<SubCategory>(postContactDto.SubCategory);
+                    _dataContext.SubCategories.Add(subCategory);
+                }
+            }
+
             var contact = _mapper.Map<Contact>(postContactDto);
             contact.Category = category;
 
@@ -159,6 +189,7 @@ public class ContactService : IContactService
         {
             var dbContact = await _dataContext.Contacts
                 .Include(c => c.Category)
+                .Include(c => c.SubCategory)
                 .FirstOrDefaultAsync(c => c.Email == email);
             if (dbContact is null)
             {

@@ -12,6 +12,8 @@ public class DataContext : DbContext
     public DbSet<Contact> Contacts => Set<Contact>();
     public DbSet<Category> Categories => Set<Category>();
 
+    public DbSet<SubCategory> SubCategories => Set<SubCategory>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Contact>()

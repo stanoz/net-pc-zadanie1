@@ -35,11 +35,11 @@ public class ContactController : ControllerBase
         return Ok(await _contactService.AddContact(postContactDto));
     }
 
-    [HttpPut("edit-contact-{id:int}")]
-    public async Task<ActionResult<ServiceResponse<GetContactDto>>> EditContact(int id,
+    [HttpPut("edit-contact-{email}")]
+    public async Task<ActionResult<ServiceResponse<GetContactDto>>> EditContact(string email,
         [FromBody] PostAndPutContactDto putContactDto)
     {
-        return Ok(await _contactService.EditContact(id, putContactDto));
+        return Ok(await _contactService.EditContact(email, putContactDto));
     }
 
     [HttpDelete("delete-contact-{email}")]
