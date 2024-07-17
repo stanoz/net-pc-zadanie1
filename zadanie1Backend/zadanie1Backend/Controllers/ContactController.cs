@@ -23,10 +23,10 @@ public class ContactController : ControllerBase
         return Ok(await _contactService.GetAllContacts());
     }
 
-    [HttpGet("get-contact-{id:int}")]
-    public async Task<ActionResult<ServiceResponse<GetContactDto>>> GetContactById(int id)
+    [HttpGet("get-contact-{email}")]
+    public async Task<ActionResult<ServiceResponse<GetContactDto>>> GetContactById(string email)
     {
-        return Ok(await _contactService.GetContactById(id));
+        return Ok(await _contactService.GetContactByEmail(email));
     }
 
     [HttpPost("add-contact")]

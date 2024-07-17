@@ -43,14 +43,14 @@ public class ContactService : IContactService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<GetContactDto>> GetContactById(int id)
+    public async Task<ServiceResponse<GetContactDto>> GetContactByEmail(string email)
     {
         var serviceResponse = new ServiceResponse<GetContactDto>();
         try
         {
             var dbContact = await _dataContext.Contacts
                 .Include(c => c.Category)
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Email == email);
 
             serviceResponse.Data = _mapper.Map<GetContactDto>(dbContact);
         }
