@@ -5,7 +5,7 @@ import {Routes, Route, Navigate} from 'react-router-dom'
 import ContactDetailsComponent from "./components/ContactDetailsComponent.jsx";
 import AddContactComponent from "./components/AddContactComponent.jsx";
 import EditContactComponent from "./components/EditContactComponent.jsx";
-
+// Komponent w którym zdefiniowany jest routing.
 function App() {
 
   return (
