@@ -5,11 +5,18 @@ using zadanie1Backend.Models;
 
 namespace zadanie1Backend;
 
+/// <summary>
+/// Klasa konfigurująca mapowania dla AutoMappera
+/// Dziedziczy po klasie <c>Profile</c>.
+/// </summary>
 public class AutoMapperProfile : Profile
 {
+    /// <summary>
+    /// Konstruktor klasy <c>AutoMapperProfile</c>, w którym
+    /// zdefiniowane są wszystkie konfiguracje mapowań.
+    /// </summary>
     public AutoMapperProfile()
     {
-
         CreateMap<Contact, GetContactDto>();
         CreateMap<Category, GetCategoryDto>();
         CreateMap<Contact, GetGeneralContactDto>();
