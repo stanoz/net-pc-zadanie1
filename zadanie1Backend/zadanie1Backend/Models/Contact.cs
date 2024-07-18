@@ -1,5 +1,8 @@
 ﻿namespace zadanie1Backend.Models;
 
+/// <summary>
+/// Klasa kontaktu służąca do przechowywania informacji o kontakcie w bazie danych.
+/// </summary>
 public class Contact
 {
     public int Id { get; set; }
