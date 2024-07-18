@@ -35,7 +35,7 @@ public class ContactController : ControllerBase
         return Ok(await _contactService.AddContact(postContactDto));
     }
 
-    [HttpPut("edit-contact-{email}")]
+    [HttpPost("edit-contact-{email}")]
     public async Task<ActionResult<ServiceResponse<GetContactDto>>> EditContact(string email,
         [FromBody] PostAndPutContactDto putContactDto)
     {
