@@ -30,10 +30,10 @@ public class ContactController : ControllerBase
     /// </summary>
     /// <returns>
     /// Kod odpowiedzi HTTP 200 z obiektem typu <c>ServiceResponse</c> zawierającym
-    /// listę obiektów typu <c>GetContactDto</c>.
+    /// listę obiektów typu <c>GetGeneralContactDto</c>.
     /// </returns>
     [HttpGet("get-all")]
-    public async Task<ActionResult<ServiceResponse<List<GetContactDto>>>> GetAll()
+    public async Task<ActionResult<ServiceResponse<List<GetGeneralContactDto>>>> GetAll()
     {
         return Ok(await _contactService.GetAllContacts());
     }
