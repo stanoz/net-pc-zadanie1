@@ -2,6 +2,9 @@
 
 namespace zadanie1Backend.Dtos;
 
+/// <summary>
+/// Klasa DTO dla dodawania i edycji kontaktu.
+/// </summary>
 public class PostAndPutContactDto
 {
     public string Name { get; set; }

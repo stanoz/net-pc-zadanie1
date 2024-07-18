@@ -1,7 +1,9 @@
-﻿using zadanie1Backend.Models;
-
+﻿
 namespace zadanie1Backend.Dtos;
 
+/// <summary>
+/// Klasa DTO dla ogólnych informacji o kontakcie.
+/// </summary>
 public class GetGeneralContactDto
 {
     public string Name { get; set; }

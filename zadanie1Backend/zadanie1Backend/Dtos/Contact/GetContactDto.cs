@@ -2,6 +2,9 @@
 
 namespace zadanie1Backend.Dtos;
 
+/// <summary>
+/// Klasa DTO dla pobierania kontaktu zawierająca szczegółowe informacje o kontakcie.
+/// </summary>
 public class GetContactDto
 {
     public string Name { get; set; }
