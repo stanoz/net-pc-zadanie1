@@ -168,3 +168,4 @@ D:\Programowanie\net-pc-zadanie1\zadanie1Backend\zadanie1Backend\obj\Debug\net8.
 D:\Programowanie\net-pc-zadanie1\zadanie1Backend\zadanie1Backend\obj\Debug\net8.0\zadanie1.77821E2A.Up2Date
 D:\Programowanie\net-pc-zadanie1\zadanie1Backend\zadanie1Backend\bin\Debug\net8.0\AutoMapper.dll
 D:\Programowanie\net-pc-zadanie1\zadanie1Backend\zadanie1Backend\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Programowanie\net-pc-zadanie1\zadanie1Backend\zadanie1Backend\bin\Debug\net8.0\BCrypt.Net-Next.dll

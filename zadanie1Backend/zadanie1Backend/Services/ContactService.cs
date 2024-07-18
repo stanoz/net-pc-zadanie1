@@ -9,7 +9,7 @@ namespace zadanie1Backend.Services;
 
 /// <summary>
 /// Serwis do obsługi operacji na kontaktach.
-/// Imlpementuje interfejs <c>IContactService</c>.
+/// Implementuje  interfejs <c>IContactService</c>.
 /// </summary>
 public class ContactService : IContactService
 {
