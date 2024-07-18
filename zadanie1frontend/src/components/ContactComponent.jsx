@@ -17,9 +17,15 @@ export default function ContactComponent({name, surname, email, phoneNumber, cat
             <p>{email}</p>
             <p>{phoneNumber}</p>
             <p>{category}</p>
-            <Link to={`/details/${email}`}>Show details</Link>
-            {/*<Link to='/edit'>Edit</Link>*/}
-            <ButtonComponent onClick={handleDelete}>Delete</ButtonComponent>
+            <div style={{marginBottom: '10px'}}>
+                <Link to={`/details/${email}`}>Show details</Link>
+            </div>
+            <div style={{marginBottom: '10px'}}>
+                <Link to={`/edit/${email}`}>Edit</Link>
+            </div>
+            <div>
+                <ButtonComponent onClick={handleDelete}>Delete</ButtonComponent>
+            </div>
         </li>
     );
 }

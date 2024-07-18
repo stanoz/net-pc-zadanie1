@@ -3,19 +3,21 @@ import {getAllCategories} from "../data/GetAllCategories.js";
 import {getAllSubCategories} from "../data/GetAllSubCategories.js";
 import {sendPostContactData} from "../data/SendPostData.js";
 import {useNavigate} from 'react-router-dom';
+import PropTypes from "prop-types";
+import {sendPutContactData} from "../data/SendPutData.js";
 
-export default function FormComponent() {
+export default function FormComponent({operation, initialData}) {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        name: '',
-        surname: '',
-        email: '',
-        password: '',
-        phoneNumber: '',
-        birthday: '',
-        category: { name: '' },
-        subCategory: { categoryName: '', name: '' }
+        name: initialData?.name || '',
+        surname: initialData?.surname || '',
+        email: initialData?.email || '',
+        password: initialData?.password || '',
+        phoneNumber: initialData?.phoneNumber || '',
+        birthday: initialData?.birthday || '',
+        category: { name: initialData?.category?.name || '' },
+        subCategory: { categoryName: initialData?.subCategory?.categoryName || '', name: initialData?.subCategory?.name || '' }
     });
 
     const [categories, setCategories] = useState([]);
@@ -65,7 +67,11 @@ export default function FormComponent() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form data submitted:', formData);
-        sendPostContactData(formData, () => navigate('/home'));
+        if (operation === 'post'){
+            sendPostContactData(formData, () => navigate('/home'));
+        }else {
+            sendPutContactData(formData, () => navigate('/home'));
+        }
     };
 
     return (
@@ -124,3 +130,8 @@ export default function FormComponent() {
         </form>
     );
 }
+
+FormComponent.propTypes = {
+    operation: PropTypes.string.isRequired,
+    initialData: PropTypes.object
+};

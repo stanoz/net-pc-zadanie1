@@ -5,7 +5,7 @@ export default function AddContactComponent(){
     return (
         <>
             <p>Add New Contact</p>
-            <FormComponent/>
+            <FormComponent operation='post'/>
             <Link to='/home'>Home</Link>
         </>
     );
