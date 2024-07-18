@@ -16,6 +16,7 @@ export default function FormComponent() {
 
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
+    const [isSubCategoryInput, setIsSubCategoryInput] = useState(false);
 
     useEffect(() => {
         getAllCategories().then(data => {
@@ -28,7 +29,11 @@ export default function FormComponent() {
             getAllSubCategories().then(data => {
                 const filteredSubCategories = data.filter(subCategory => Object.keys(subCategory)[0] === formData.category.name);
                 setSubCategories(filteredSubCategories.map(subCategory => ({ name: subCategory[formData.category.name] })));
+                setIsSubCategoryInput(formData.category.name === "inny");
             });
+        } else {
+            setSubCategories([]);
+            setIsSubCategoryInput(false);
         }
     }, [formData.category.name]);
 
@@ -38,7 +43,7 @@ export default function FormComponent() {
             setFormData(prevState => ({
                 ...prevState,
                 category: { name: value },
-                subCategory: { categoryName: '', name: '' } // Reset subCategory when category changes
+                subCategory: { categoryName: '', name: '' }
             }));
         } else if (name === 'subCategoryName') {
             setFormData(prevState => ({
@@ -93,16 +98,23 @@ export default function FormComponent() {
                     ))}
                 </select>
             </div>
-            <div>
-                <label htmlFor="subCategoryName">SubCategory Name:</label>
-                <select id="subCategoryName" name="subCategoryName" value={formData.subCategory.name}
-                        onChange={handleChange}>
-                    <option value="">Select a SubCategory</option>
-                    {subCategories.map(subCategory => (
-                        <option key={subCategory.name} value={subCategory.name}>{subCategory.name}</option>
-                    ))}
-                </select>
-            </div>
+            {subCategories.length > 0 && (
+                <div>
+                    <label htmlFor="subCategoryName">SubCategory Name:</label>
+                    <select id="subCategoryName" name="subCategoryName" value={formData.subCategory.name} onChange={handleChange}>
+                        <option value="">Select a SubCategory</option>
+                        {subCategories.map(subCategory => (
+                            <option key={subCategory.name} value={subCategory.name}>{subCategory.name}</option>
+                        ))}
+                    </select>
+                </div>
+            )}
+            {isSubCategoryInput && (
+                <div>
+                    <label htmlFor="subCategoryName">SubCategory Name:</label>
+                    <input type="text" id="subCategoryName" name="subCategoryName" value={formData.subCategory.name} onChange={handleChange} />
+                </div>
+            )}
             <button type="submit">Submit</button>
         </form>
     );
