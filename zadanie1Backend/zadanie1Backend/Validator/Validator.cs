@@ -4,8 +4,20 @@ using zadanie1Backend.Dtos;
 
 namespace zadanie1Backend.Validator;
 
+/// <summary>
+/// Validator.
+/// Sprawdza poprawność danych.
+/// Implementuje interfejs IValidate.
+/// </summary>
 public class Validator : IValidate
 {
+    /// <summary>
+    /// Metoda sprawdzająca poprawność danych kontaktu.
+    /// </summary>
+    /// <param name="contact">Kontakt do sprawdzenia typu <c>PostAndPutContactDto</c></param>
+    /// <returns>
+    /// Zwraca true jeśli dane są poprawne, w przeciwnym wypadku false.
+    /// </returns>
     public bool ValidateContact(PostAndPutContactDto contact)
     {
         if (contact.Name.IsNullOrEmpty())
@@ -41,6 +53,7 @@ public class Validator : IValidate
             return false;
         }
 
+        /// Sprawdzenie czy data urodzenia jest poprawna.
         if (contact.Birthday > DateOnly.FromDateTime(DateTime.Now))
         {
             return false;
