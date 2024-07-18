@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {getAllCategories} from "../data/GetAllCategories.js";
 import {getAllSubCategories} from "../data/GetAllSubCategories.js";
+import {sendPostContactData} from "../data/SendPostData.js";
 
 export default function FormComponent() {
     const [formData, setFormData] = useState({
@@ -61,6 +62,7 @@ export default function FormComponent() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form data submitted:', formData);
+        sendPostContactData(formData);
     };
 
     return (
