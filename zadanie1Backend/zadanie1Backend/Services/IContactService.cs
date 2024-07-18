@@ -3,6 +3,9 @@ using zadanie1Backend.Models;
 
 namespace zadanie1Backend.Services;
 
+/// <summary>
+/// Interfejs serwisu kontaktów.
+/// </summary>
 public interface IContactService
 {
     public Task<ServiceResponse<List<GetGeneralContactDto>>> GetAllContacts();
