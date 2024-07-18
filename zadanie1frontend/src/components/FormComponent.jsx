@@ -2,8 +2,11 @@ import {useEffect, useState} from 'react';
 import {getAllCategories} from "../data/GetAllCategories.js";
 import {getAllSubCategories} from "../data/GetAllSubCategories.js";
 import {sendPostContactData} from "../data/SendPostData.js";
+import {useNavigate} from 'react-router-dom';
 
 export default function FormComponent() {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: '',
         surname: '',
@@ -62,7 +65,7 @@ export default function FormComponent() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form data submitted:', formData);
-        sendPostContactData(formData);
+        sendPostContactData(formData, () => navigate('/home'));
     };
 
     return (

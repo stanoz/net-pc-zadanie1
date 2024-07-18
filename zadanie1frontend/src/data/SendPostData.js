@@ -1,4 +1,4 @@
-const sendPostContactData = async (formData) => {
+const sendPostContactData = async (formData, onSuccess) => {
     const baseUrl = 'https://localhost:44373/api/Contact/add-contact';
     const dataToSend = {
         "Name": formData.name,
@@ -33,6 +33,7 @@ const sendPostContactData = async (formData) => {
 
         const data = await response.json();
         console.log('Success:', data);
+        onSuccess();
     } catch (error) {
         console.error('Error:', error);
     }
