@@ -1,3 +1,4 @@
+//funkcja uderza w endpoint do dodania nowego kontaktu, przesyła nowy kontakt w formacie json
 const sendPostContactData = async (formData, onSuccess) => {
     const baseUrl = 'https://localhost:44373/api/Contact/add-contact';
     const dataToSend = {

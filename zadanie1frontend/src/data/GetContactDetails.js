@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+// funkcja uderza w endpoint w celu pobrania szczegółowych danych o kontakcie o podanym adresie email
 function getContactDetailsByEmail(email) {
     const baseUrl = 'https://localhost:44373/api/Contact/get-contact-';
     const urlWithParam = `${baseUrl}${encodeURIComponent(email)}`;

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+// funkcja uderza w endpoint w celu pobrania wszystkich kategorii
 const getAllCategories = () => {
     const baseUrl = 'https://localhost:44373/api/Category/get-all';
     return $.get(baseUrl).then(response => {

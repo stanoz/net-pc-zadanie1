@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+// funkcja uderza w endpoint w celu pobrania listy wszystkich podkategorii
 const getAllSubCategories = () => {
     const baseUrl = 'https://localhost:44373/api/SubCategory/get-all';
     return $.get(baseUrl).then(response => {

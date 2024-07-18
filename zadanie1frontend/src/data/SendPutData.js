@@ -1,3 +1,5 @@
+// funkcja uderza w endpoint do edycji kontaktu o podanym adresie email, kontakt z
+// nowymi danymi jest przesyłany w formacie json
 const sendPutContactData = async (formData, onSuccess) => {
     const baseUrl = 'https://localhost:44373/api/Contact/edit-contact-';
     const urlWithParam = `${baseUrl}${encodeURIComponent(formData.email)}`;

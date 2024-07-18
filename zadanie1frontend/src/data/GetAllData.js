@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+//funkcja uderza w endpoint w celu pobrania listy wszyskich kontaktów. Każdy kontakt zawiera w sobie ogólne dane.
 const getAllContacts = () => {
     const baseUrl = 'https://localhost:44373/api/Contact/get-all';
     return $.get(baseUrl).then(response => {
