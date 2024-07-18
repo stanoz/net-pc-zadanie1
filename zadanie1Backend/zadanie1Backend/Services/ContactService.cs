@@ -37,7 +37,7 @@ public class ContactService : IContactService
     /// Wyjątek w przypadku błędu podczas pobierania danych z bazy danych lub mapowania.
     /// </exception>
     /// <returns>
-    /// Zwraca listę obiektów <c>GetGeneralContactDto</c>.
+    /// Zwraca listę kontaktów w postaci <c>ServiceResponse</c> zawierającego listę obiektów <c>GetGeneralContactDto</c>
     /// </returns>
     public async Task<ServiceResponse<List<GetGeneralContactDto>>> GetAllContacts()
     {
@@ -71,7 +71,7 @@ public class ContactService : IContactService
     /// Wyjątek w przypadku błędu podczas pobierania danych z bazy danych lub mapowania.
     /// </exception>
     /// <returns>
-    /// Zwraca kontatk jako obiekt <c>GetContactDto</c>.
+    /// Zwraca obiekt <c>ServiceResponse</c> zawierający kontatk jako obiekt <c>GetContactDto</c>.
     /// </returns>
     public async Task<ServiceResponse<GetContactDto>> GetContactByEmail(string email)
     {
@@ -103,7 +103,7 @@ public class ContactService : IContactService
     /// <param name="putContactDto">Obiekt klasy <c>PostAndPutContactDto</c>
     /// Zawiera zmienione dane kontaktu.</param>
     /// <returns>
-    /// Zwraca edytowany kontakt jako obiekt <c>GetContactDto</c>.
+    /// Zwraca obiekt <c>ServiceResponse</c> zawierający edytowany kontakt jako obiekt <c>GetContactDto</c>.
     /// </returns>
     /// <exception cref="ArgumentException">
     /// Wyjątek w przypadku gdy kontakt nie został znaleziony w bazie danych.
@@ -192,7 +192,7 @@ public class ContactService : IContactService
     /// <param name="postContactDto">Obiekt klasy <c>PostAndPutContactDto</c>
     /// zawiera dane do nowego kontaktu.</param>
     /// <returns>
-    /// Zwraca dodany kontakt jako obiekt klasy <c>GetContactDto</c>.
+    /// Zwraca obiekt <c>ServiceResponse</c> zawierający dodany kontakt jako obiekt klasy <c>GetContactDto</c>.
     /// </returns>
     /// <exception cref="ArgumentException">
     /// Wyjątek w przypadku gdy kontakt o podanym adresie email już istnieje w bazie danych.
@@ -274,7 +274,7 @@ public class ContactService : IContactService
     /// </summary>
     /// <param name="email">Adres email kontatku jako <c>string</c>.</param>
     /// <returns>
-    /// Zwaca adres email usuniętego kontaktu jako <c>string</c>.
+    /// Zwaca obiekt <c>ServiceResponse</c> zawierający adres email usuniętego kontaktu jako <c>string</c>.
     /// </returns>
     /// <exception cref="ArgumentException">
     /// Wyjątek w przypadku gdy kontakt nie został znaleziony w bazie danych.

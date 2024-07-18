@@ -30,7 +30,7 @@ public class CategoryService : ICategoryService
     /// Asynchroniczna metoda do pobierania wszystkich kategorii.
     /// </summary>
     /// <returns>
-    /// Zwraca listę kategorii w postaci obiektu <c>ServiceResponse</c>.
+    /// Zwraca listę kategorii w postaci <c>ServiceResponse</c> zawierającego listę obiektów <c>GetCategoryDto</c>.
     /// </returns>
     /// <exception>
     /// Wyjątek w przypadku błędu podczas interakcji z bazą danych.
