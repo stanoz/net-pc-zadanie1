@@ -7,6 +7,7 @@ using zadanie1Backend.Validator;
 
 var builder = WebApplication.CreateBuilder(args);
 
+/// Dodanie polityki CORS, która pozwala na dostęp do API z wybranych adresów URL.
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyAllowSpecificOrigins",
@@ -18,13 +19,17 @@ builder.Services.AddCors(options =>
         });
 });
 
+/// Dodanie bazy danych.
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+/// Dodanie AutoMappera.
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<Profile, AutoMapperProfile>();
+
+/// Dodanie serwisów.
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
