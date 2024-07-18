@@ -2,7 +2,7 @@ import {Link, useParams} from "react-router-dom";
 import FormComponent from "./FormComponent.jsx";
 import {useEffect, useState} from "react";
 import {getContactDetailsByEmail} from "../data/GetContactDetails.js";
-
+// Komponent wyświetla komponent wyświetlający formularz do edcyji kontatku oraz link do głównej strony
 export default function EditContactComponent(){
     const {email} = useParams();
 

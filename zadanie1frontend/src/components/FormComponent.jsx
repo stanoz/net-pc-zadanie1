@@ -5,10 +5,10 @@ import {sendPostContactData} from "../data/SendPostData.js";
 import {useNavigate} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {sendPutContactData} from "../data/SendPutData.js";
-
+// Komponent wyświetla formularz służący do edycji lub dodania kontaktu
 export default function FormComponent({operation, initialData}) {
     const navigate = useNavigate();
-
+//jeżeli zostały przesłane dane to pola formularzu są nimi wstępnie wypełnione
     const [formData, setFormData] = useState({
         name: initialData?.name || '',
         surname: initialData?.surname || '',
@@ -29,7 +29,7 @@ export default function FormComponent({operation, initialData}) {
             setCategories(data);
         });
     }, []);
-
+//ustawienie które subCategories są dostępne do wyboru
     useEffect(() => {
         if (formData.category.name) {
             getAllSubCategories().then(data => {
@@ -42,7 +42,7 @@ export default function FormComponent({operation, initialData}) {
             setIsSubCategoryInput(false);
         }
     }, [formData.category.name]);
-
+//aktualizuje stan formularza w zależności od zmian w polach input
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'categoryName') {
@@ -63,7 +63,7 @@ export default function FormComponent({operation, initialData}) {
             }));
         }
     };
-
+//w zależności od przesłanej operacji dodanie kontaktu lub edycja kontaktu
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form data submitted:', formData);

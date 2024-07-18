@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-
+//Komponent wyświetla szczegółowe dane o kontakcie
 export default function ShowContactDetailsComponent({name, surname, email, category, password, phoneNumber, birthday, subCategory}){
     return (
         <>

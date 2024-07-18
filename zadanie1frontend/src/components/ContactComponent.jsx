@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import ButtonComponent from "./ButtonComponent.jsx";
 import {Link} from "react-router-dom"
 import {deleteContactByEmail} from "../data/DeleteContact.js";
-
+// Komponent wyświetlający podstawowe dane o kontaktach jako listę.
+// Wyświetla link do edycji, link do szczegółów o kontakcie oraz przycisk do usunięcia kontatku
 export default function ContactComponent({name, surname, email, phoneNumber, category, onDelete}){
     const handleDelete = () => {
         deleteContactByEmail(email).then(() => {

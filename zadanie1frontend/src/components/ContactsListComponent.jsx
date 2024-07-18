@@ -2,7 +2,8 @@ import {useState, useEffect} from "react";
 import ContactComponent from "./ContactComponent.jsx";
 import {getAllContacts} from "../data/GetAllData.js";
 import {Link} from "react-router-dom";
-
+// Komponent wyświetla komponent służący do wyświetlania ogólnych danych o kontakcie oraz
+// link do doadania nowego kontaktu
 export default function ContactsListComponent() {
     const [contacts, setContacts] = useState([]);
 

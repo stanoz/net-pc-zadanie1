@@ -3,7 +3,8 @@ import {useParams} from "react-router-dom";
 import {useState, useEffect} from "react";
 import {getContactDetailsByEmail} from "../data/GetContactDetails.js";
 import ShowContactDetailsComponent from "./ShowContactDetailsComponent.jsx";
-
+// Komponent wyświetla komponent służący do wyświetlania szczegółów o danym kontakcie oraz
+// link do powrotu na stronę główną
 export default function ContactDetailsComponent(){
     const {email} = useParams();
     const [contactDetails, setContactDetails] = useState(null)

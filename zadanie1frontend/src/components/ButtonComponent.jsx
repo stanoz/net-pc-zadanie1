@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+// Komponent służący jako przycisk, przyjmuje operację obłsugującą kliknięcie
 export default function ButtonComponent({ children, onClick }) {
     return (
         <button onClick={onClick}>{children}</button>
