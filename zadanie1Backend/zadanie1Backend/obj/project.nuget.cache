@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2Pcn86bBkvnk+z8wYu1oRLck9H+3aUCerk6v/LlEwcFdMGUJRsf/SmbhQNqN4fcbfi8RZYNIXsdFdBA9F7tT2g==",
+  "dgSpecHash": "p9PeVw9PI8E9kWdZpDOSbX+GPTBXB3cEQ9bJp8fBcrLIlc6p6VHIX/zwXxdNcSvGEXhiZWE+1qhBNYWLjyt8Mw==",
   "success": true,
   "projectFilePath": "D:\\Programowanie\\net-pc-zadanie1\\zadanie1Backend\\zadanie1Backend\\zadanie1Backend.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\sozie\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\sozie\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\sozie\\.nuget\\packages\\azure.identity\\1.11.3\\azure.identity.1.11.3.nupkg.sha512",
+    "C:\\Users\\sozie\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\sozie\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\sozie\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\sozie\\.nuget\\packages\\microsoft.build.framework\\16.10.0\\microsoft.build.framework.16.10.0.nupkg.sha512",

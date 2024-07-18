@@ -4,6 +4,7 @@ using zadanie1Backend.Data;
 using zadanie1Backend.Dtos;
 using zadanie1Backend.Models;
 using zadanie1Backend.Validator;
+using BCrypt.Net;
 
 namespace zadanie1Backend.Services;
 
@@ -85,6 +86,7 @@ public class ContactService : IContactService
             dbContact.Name = putContactDto.Name;
             dbContact.Surname = putContactDto.Surname;
             dbContact.Email = putContactDto.Email;
+            dbContact.Password = BCrypt.Net.BCrypt.HashPassword(putContactDto.Password);
             dbContact.PhoneNumber = putContactDto.PhoneNumber;
             dbContact.Birthday = putContactDto.Birthday;
 
@@ -168,6 +170,8 @@ public class ContactService : IContactService
             var contact = _mapper.Map<Contact>(postContactDto);
             contact.Category = category;
             contact.SubCategory = subCategory;
+
+            contact.Password = BCrypt.Net.BCrypt.HashPassword(contact.Password);
 
             _dataContext.Contacts.Add(contact);
             await _dataContext.SaveChangesAsync();
